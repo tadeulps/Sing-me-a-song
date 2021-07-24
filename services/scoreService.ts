@@ -12,7 +12,6 @@ export async function upVote(id:number) {
 
 export async function downVote(id:number) {
     const result= await scoreRepository.downVoteScore(id);
-    console.log(result);
     if(result.score==-5) await scoreRepository.deleteSong(id);
     return result;
 };

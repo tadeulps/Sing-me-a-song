@@ -2,6 +2,7 @@ import * as recommendationRepository from '../repositories/recommendationReposit
 
 export async function newRecommendation(name:string,youtubeLink:string) {
     const result = await recommendationRepository.newRecommendation(name,youtubeLink);
+    if(result.length===0) return null;
     return result;
 };
 
@@ -24,4 +25,11 @@ export async function randomSong() {
 
     const random=Math.floor(Math.random() * result.length);
     return result[random];
-}
+};
+
+export async function topSongs(amount:number) {
+    const result= await recommendationRepository.topSongs(amount);
+    if(result.length===0) return null;
+
+    return result;
+};

@@ -16,4 +16,6 @@ app.post("/recommendations/:id/downvote",scoreController.downVote);
 
 app.get("/recommendations",recommendationController.recommendation);
 
+app.get("/recommendations/top/:amount",recommendationController.topSongs);
+
 export default app;

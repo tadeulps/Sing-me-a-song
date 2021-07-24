@@ -1,13 +1,10 @@
 import connection from "../database";
 
 export async function newRecommendation(name:string,youtubeLink:string) {
-    try{
     const result= await connection.query(`INSERT INTO recommendations (name,url) 
     VALUES ($1,$2) RETURNING *`,[name,youtubeLink]);
     return result.rows[0];
-    }catch{
-        return null
-    }
+    
 };
 
 export async function checkIfSongsExist() {
@@ -27,4 +24,10 @@ export async function  randomSong(x:number) {
         result =await connection.query(`SELECT * FROM recommendations`);
         return result.rows;
     }
+};
+
+export async function topSongs(amount:number) {
+    const result = await connection.query(`SELECT * FROM recommendations ORDER BY score DESC 
+    LIMIT $1`,[amount]);
+    return result.rows;
 }
